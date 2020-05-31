@@ -6,9 +6,15 @@ wayd is a python script that pops up every 15 minutes to ask what you're doing w
 
 Currently, you have to keep the terminal window open the whole time it's running and it asks you where you want to store your files every time you start the script. I'm sure there's a lot of other issues I'm not aware of.
 
+## dependencies
+* PySimpleGUI
+* datetime
+* schedule
+
 ## to use
 * download `wayd.py`
-* navigate to it in your terminal
+* download dependencies with `pip3 install PySimpleGUI datetime schedule`
+* navigate to `wayd.py` in your terminal
 * run with `python3 wayd.py &` (the `&` allows you to keep using the terminal after starting the script)
 * select the folder for wayd to store your files
 * wayd will ask what you're doing
