@@ -27,7 +27,7 @@ You can keep the file open and add your own content to it as well, giving you a 
 * download dependencies with `pip3 install PySimpleGUI datetime schedule`
 * open `wayd.py` in your text editor and set `folder_path` to where you want your files saved
 * open `com.kailanathaniel.wayd.plist` in your text editor and set the first string under `ProgramArguments` to where your python executable is stored and the second string to where you've stored `wayd.py`
-* use terminal to navigate to the folder with `com.kailanathaniel.wayd.plist` and move it to your `LaunchAgents` folder with `mv com.kailanathaniel.wayd.plist ~~/Library/LaunchAgents/`
+* use terminal to navigate to the folder with `com.kailanathaniel.wayd.plist` and move it to your `LaunchAgents` folder with `mv com.kailanathaniel.wayd.plist ~/Library/LaunchAgents/`
 * start the agent with `launchctl bootstrap gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist`
 
 ## tips
