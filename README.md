@@ -4,7 +4,7 @@ Couldn't find a program to do what I wanted, so I built my own. Currently very h
 
 wayd is a python script that uses `launchd` to pop up every 15 minutes to ask what you're doing with a text input box. Fill in your current activity and it creates/appends a markdown file named with today's date with the current time and your activity.
 
-If this is the first time wayd has run today, it creates a new file that looks like this:
+If this is the first time wayd has run today, it creates a new file named dd-mm-yyyy.md that looks like this:
 
 > # dd.mm.yyyy
 >## today i will
@@ -13,7 +13,7 @@ If this is the first time wayd has run today, it creates a new file that looks l
 >## ideas // thoughts // things i did
 >* time: activity
 
-If wayd has already run or there's already a file named dd-mm-yyy.md in the directory, then it just appends `* time: activity` to the end of the file.
+If wayd has already run or there's already a file named dd-mm-yyyy.md in the directory, then it just appends `* time: activity` to the end of the file.
 
 You can keep the file open and add your own content to it as well, giving you a daily file with a mix of thoughts and timestamped activities.
 
