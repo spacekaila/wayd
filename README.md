@@ -22,7 +22,6 @@ You can keep the file open and add your own content to it as well, giving you a 
 ## dependencies
 * PySimpleGUI
 * datetime
-* schedule
 
 ## to use
 * download `wayd.py` and `com.kailanathaniel.wayd.plist`

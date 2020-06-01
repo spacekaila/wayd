@@ -1,8 +1,6 @@
 import PySimpleGUI as sg
 from datetime import datetime
-import schedule
-import time
-import os
+from os.path import isfile
 
 #folder where dailies are stored
 folder_path = '/Users/KailaNathaniel/Documents/dailies/'
@@ -34,7 +32,7 @@ full_path = folder_path + date_dash + '.md'
 #if content has been entered
 if values[0] != '':
     #if file already exists
-    if os.path.isfile(full_path):
+    if isfile(full_path):
         f = open(folder_path + date_dash + '.md','a+')
         f.write('\n* ' + time + ': ' + values[0])
         f.close()
