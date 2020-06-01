@@ -6,9 +6,9 @@ wayd is a python script that uses `launchd` to pop up every 15 minutes to ask wh
 
 If this is the first time wayd has run today, it creates a new file that looks like this:
 
-> # dd.mm.yyy
+> # dd.mm.yyyy
 >## today i will
->>==thrive==
+>>==thrive (`or your own goal`)==
 >
 >## ideas // thoughts // things i did
 >* time: activity
