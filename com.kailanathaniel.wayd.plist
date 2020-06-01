@@ -5,7 +5,7 @@
     <key>Label</key>
     <!-- The label should be the same as the filename without the extension -->
     <string>com.kailanathaniel.wayd</string>
-    <!-- Specify how to run your program here -->
+    <!-- How the program is run -->
     <key>ProgramArguments</key>
     <array>
         <!-- path to python executable -->
@@ -13,10 +13,10 @@
         <!-- where wayd.py is stored -->
         <string>your/copy/of/wayd/wayd.py</string>
     </array>
-    <!-- runs ever 15 minutes -->
+    <!-- runs every 15 minutes -->
     <key>StartInterval</key>
     <integer>900</integer>
-    <!-- run when first loaded -->
+    <!-- wayd runs when first loaded -->
     <key>RunAtLoad</key>
     <true/>
 </dict>

@@ -1,5 +1,7 @@
 # what are you doing? (wayd)
 
+![wayd](wayd.png)
+
 Couldn't find a program to do what I wanted, so I built my own. Currently very hacky.
 
 wayd is a python script that uses `launchd` to pop up every 15 minutes to ask what you're doing with a text input box. Fill in your current activity and it creates/appends a markdown file named with today's date with the current time and your activity.
@@ -24,21 +26,42 @@ You can keep the file open and add your own content to it as well, giving you a 
 
 ## to use
 * download `wayd.py` and `com.kailanathaniel.wayd.plist`
-* download dependencies with `pip3 install PySimpleGUI datetime schedule`
+* download dependencies with
+```
+pip3 install PySimpleGUI datetime schedule
+```
 * open `wayd.py` in your text editor and set `folder_path` to where you want your files saved
 * open `com.kailanathaniel.wayd.plist` in your text editor and set the first string under `ProgramArguments` to where your python executable is stored and the second string to where you've stored `wayd.py`
-* use terminal to navigate to the folder with `com.kailanathaniel.wayd.plist` and move it to your `LaunchAgents` folder with `mv com.kailanathaniel.wayd.plist ~/Library/LaunchAgents/`
-* start the agent with `launchctl bootstrap gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist`
+* use terminal to navigate to the folder with `com.kailanathaniel.wayd.plist` and move it to your `LaunchAgents` folder with
+```
+mv com.kailanathaniel.wayd.plist ~/Library/LaunchAgents/
+```
+* load (start) the agent with
+```
+launchctl bootstrap gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist
+```
 
 ## tips
 * find your user ID by running `id -u` in terminal
-* find where your python executable is stored by running `which python` in terminal
-* stop the agent with `launchctl bootout gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist`
-* if you want to be able to stop and start the agent with a single command, add these two lines to your `.bash_profile` to start/stop the agent by running `wayd_start` and `wayd_pause` in your terminal
-    * `alias wayd_start="launchctl bootstrap gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist"`
-    * `alias wayd_pause="launchctl bootout gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist"`
+* find where your python executable is stored by running `which python3` in terminal
+* stop the agent with
+```
+launchctl bootout gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist
+```
+* if you want to be able to stop and start the agent with a single command, add these two lines to your `.bash_profile`
+```
+alias wayd_start="launchctl bootstrap gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist"
+alias wayd_pause="launchctl bootout gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist"
+```
+    * start/stop the agent by running `wayd_start` and `wayd_pause` in your terminal
+
 * customize how often wayd runs by changing the number under `StartInterval` in `com.kailanathaniel.wayd.plist` (it's in seconds)
 * customize the new file template by changing the string under `#if file doesn't exist` line in `wayd.py`
+* if you don't want to run this with `launchd`, you can use `cron`, too. You don't need the `.plist` file, just open `cron` with `crontab -e` from any location and put in this line:
+
+```
+*/15 * * * * /path/to/your/python/executable /path/to/wayd.py
+```
 
 
 ## future
