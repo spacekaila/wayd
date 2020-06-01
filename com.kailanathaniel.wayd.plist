@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <!-- The label should be the same as the filename without the extension -->
+    <string>com.kailanathaniel.wayd</string>
+    <!-- Specify how to run your program here -->
+    <key>ProgramArguments</key>
+    <array>
+        <!-- path to python executable -->
+        <string>your/python/executable</string>
+        <!-- where wayd.py is stored -->
+        <string>your/copy/of/wayd/wayd.py</string>
+    </array>
+    <!-- runs ever 15 minutes -->
+    <key>StartInterval</key>
+    <integer>900</integer>
+    <!-- run when first loaded -->
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>

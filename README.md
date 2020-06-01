@@ -2,9 +2,20 @@
 
 Couldn't find a program to do what I wanted, so I built my own. Currently very hacky.
 
-wayd is a python script that pops up every 15 minutes to ask what you're doing with a text input box. Fill in your current activity and it creates/appends a file named with today's date with the current time and your activity.
+wayd is a python script that uses `launchd` to pop up every 15 minutes to ask what you're doing with a text input box. Fill in your current activity and it creates/appends a markdown file named with today's date with the current time and your activity.
 
-Currently, you have to keep the terminal window open the whole time it's running ~and it asks you where you want to store your files every time you start the script. I'm sure there's a lot of other issues I'm not aware of.~ This isn't working, you have to manually set the folder path right now.
+If this is the first time wayd has run today, it creates a new file that looks like this:
+
+> # dd.mm.yyy
+>## today i will
+>>==thrive==
+>
+>## ideas // thoughts // things i did
+>* time: activity
+
+If wayd has already run or there's already a file named dd-mm-yyy.md in the directory, then it just appends `* time: activity` to the end of the file.
+
+You can keep the file open and add your own content to it as well, giving you a daily file with a mix of thoughts and timestamped activities.
 
 ## dependencies
 * PySimpleGUI
@@ -12,19 +23,25 @@ Currently, you have to keep the terminal window open the whole time it's running
 * schedule
 
 ## to use
-* download `wayd.py`
+* download `wayd.py` and `com.kailanathaniel.wayd.plist`
 * download dependencies with `pip3 install PySimpleGUI datetime schedule`
 * open `wayd.py` in your text editor and set `folder_path` to where you want your files saved
-* navigate to `wayd.py` in your terminal
-* run with `python3 wayd.py &` (the `&` allows you to keep using the terminal after starting the script)
-* select the folder for wayd to store your files
-* wayd will ask what you're doing
-    * this repeats every 15 minutes until you close the program either with `⌃ + c` or closing the terminal window
+* open `com.kailanathaniel.wayd.plist` in your text editor and set the first string under `ProgramArguments` to where your python executable is stored and the second string to where you've stored `wayd.py`
+* use terminal to navigate to the folder with `com.kailanathaniel.wayd.plist` and move it to your `LaunchAgents` folder with `mv com.kailanathaniel.wayd.plist ~~/Library/LaunchAgents/`
+* start the agent with `launchctl bootstrap gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist`
+
+## tips
+* find your user ID by running `id -u` in terminal
+* find where your python executable is stored by running `which python` in terminal
+* stop the agent with `launchctl bootout gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist`
+* if you want to be able to stop and start the agent with a single command, add these two lines to your `.bash_profile` to start/stop the agent by running `wayd_start` and `wayd_pause` in your terminal
+    * `alias wayd_start="launchctl bootstrap gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist"`
+    * `alias wayd_pause="launchctl bootout gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist"`
+* customize how often wayd runs by changing the number under `StartInterval` in `com.kailanathaniel.wayd.plist` (it's in seconds)
+* customize the new file template by changing the string under `#if file doesn't exist` line in `wayd.py`
 
 
 ## future
-* [ ] fix GUI input for folderpath
-* [ ] add ability to save settings (folder path)
-* [ ] get rid of warning about NSSavePanel/NSApplication
+* [ ] add ability to save settings
 * [ ] package as standalone app
-* [ ] make GUI prettier
+* [ ] make it prettier

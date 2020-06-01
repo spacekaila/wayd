@@ -2,46 +2,43 @@ import PySimpleGUI as sg
 from datetime import datetime
 import schedule
 import time
+import os
 
+#folder where dailies are stored
+folder_path = '/Users/KailaNathaniel/Documents/dailies/'
 
-#TODO not working? if I run this, then it only runs once, when i call just jobs(), it doesn't make it into the while loop
-# settings_layout = [[sg.Text('Where do you want your files kept?')],
-#       [sg.Text('wayd folder', size=(15, 1)), sg.InputText(), sg.FolderBrowse(initial_folder = '~/Documents')],
-#       [sg.Submit(), sg.Cancel()]]
-#
-# settings_window = sg.Window('Settings', settings_layout)
-#
-# settings_event, settings_values = settings_window.read()
-# settings_window.close()
-# folder_path = settings_values[0]     # get the data from the values dictionary
+#layout of input box
+wayd_layout = [
+    [sg.Text('What are you doing?')],
+    [sg.InputText()],
+    [sg.Submit(), sg.Cancel()]
+]
 
+#create input box, take input
+window = sg.Window('wayd', wayd_layout)
+event, values = window.read()
+#time that input was entered
+time = datetime.now().strftime('%H:%M')
 
-folder_path = 'your/desired/path'
+#close input box
+window.close()
 
-def job():
-    # Very basic window.  Return values using auto numbered keys
-    wayd_layout = [
-        [sg.Text('What are you doing?')],
-        [sg.InputText()],
-        [sg.Submit(), sg.Cancel()]
-    ]
+#today's date in two formats
+date_dash = datetime.now().strftime('%Y-%m-%d')
+date_dot = datetime.now().strftime('%d.%m.%Y')
 
-    window = sg.Window('wayd', wayd_layout)
-    event, values = window.read()
-    window.close()
+#full path to daily note
+full_path = folder_path + date_dash + '.md'
 
-    date = datetime.now().strftime('%Y-%m-%d')
-    time = datetime.now().strftime('%H:%M')
-
-    if values[0] != '':
-        f = open(folder_path + date + '.md','a+')
-        f.write('\n' + time + '\t' + values[0])
+#if content has been entered
+if values[0] != '':
+    #if file already exists
+    if os.path.isfile(full_path):
+        f = open(folder_path + date_dash + '.md','a+')
+        f.write('\n* ' + time + ': ' + values[0])
         f.close()
-
-job()
-
-schedule.every(15).minutes.do(job)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+    #if file doesn't exist (aka program hasn't run today)
+    else:
+        f = open(folder_path + date_dash + '.md','w+')
+        f.write('# ' + date_dot + '\n## today i will\n>==thrive==\n\n## ideas // thoughts // things i did\n* ' + time + ': ' + values[0])
+        f.close()
