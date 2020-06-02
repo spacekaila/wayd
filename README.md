@@ -51,6 +51,7 @@ launchctl bootout gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.p
 alias wayd_start="launchctl bootstrap gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist"
 alias wayd_pause="launchctl bootout gui/<user id> ~/Library/LaunchAgents/com.kailanathaniel.wayd.plist"
 ```
+
     * start/stop the agent by running `wayd_start` and `wayd_pause` in your terminal
 
 * customize how often wayd runs by changing the number under `StartInterval` in `com.kailanathaniel.wayd.plist` (it's in seconds)
