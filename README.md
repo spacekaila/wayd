@@ -21,13 +21,12 @@ You can keep the file open and add your own content to it as well, giving you a 
 
 ## dependencies
 * PySimpleGUI
-* datetime
 
 ## to use
 * download `wayd.py` and `com.kailanathaniel.wayd.plist`
 * download dependencies with
 ```
-pip3 install PySimpleGUI datetime schedule
+pip3 install PySimpleGUI
 ```
 * open `wayd.py` in your text editor and set `folder_path` to where you want your files saved
 * open `com.kailanathaniel.wayd.plist` in your text editor and set the first string under `ProgramArguments` to where your python executable is stored and the second string to where you've stored `wayd.py`
